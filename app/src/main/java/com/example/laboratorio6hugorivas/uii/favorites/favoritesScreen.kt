@@ -189,6 +189,7 @@ fun EventDetail(event: Event) {
         }
     }
 }
+//asa
 data class Event(
     val place: String,
     val name: String,
