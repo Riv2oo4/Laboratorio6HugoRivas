@@ -47,56 +47,42 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
 
 
 data class Eventos(val name: String, val artist: String, val imageId: Int,val favorite: Boolean = false )
-class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
 
-
-            val events = listOf(
-                "AC/DC" to "Hollywood Bowl",
-                "Guns N Roses" to "Red Rocks",
-                "Metallica" to "Gorge AmphiTheatre"
-            )
-
-            Scaffold(
-                topBar = {
-                    TopAppBar(
-                        title = { Text(text = "Lista de Lugares") },
-
-                        )
-                }
-            ) {
-                EventList(events = events)
-            }
-
-
-
-
-
-
-
-
-        }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SecondScreen(navController: NavController){
+    Scaffold {
+        BodyContent(navController)
     }
 }
-
-@Preview(showBackground = true)
 @Composable
-fun PreviewEventList() {
-    val events = listOf(
-        "Evento 1" to "Lugar 1",
-        "Evento 2" to "Lugar 2",
-        "Evento 3" to "Lugar 3"
-    )
+fun BodyContent(navController: NavController){
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        val events = listOf(
+            "Evento 1" to "Lugar 1",
+            "Evento 2" to "Lugar 2",
+            "Evento 3" to "Lugar 3"
+        )
 
-    EventList(events = events)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            items(events) { event ->
+                EventItem(name = event.first, place = event.second)
+            }
+        }
+    }
 }
 @Composable
 fun EventItem(name: String, place: String) {
@@ -140,7 +126,7 @@ fun EventItem(name: String, place: String) {
         }
     }
 }
-
+/*
 @Composable
 fun EventList(events: List<Pair<String, String>>) {
     LazyColumn(
@@ -151,3 +137,9 @@ fun EventList(events: List<Pair<String, String>>) {
         }
     }
 }
+
+ */
+
+
+
+

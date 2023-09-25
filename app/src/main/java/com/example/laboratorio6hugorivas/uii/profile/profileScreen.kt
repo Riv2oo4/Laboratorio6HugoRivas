@@ -47,21 +47,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
 
 
-data class Eventos(val name: String, val artist: String, val imageId: Int,val favorite: Boolean = false )
-class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-
-            ProfilePage()
-
-        }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FourthScreen(navController: NavController) {
+    Scaffold {
+        BodyContent(navController)
     }
+}
+@Composable
+fun BodyContent(navController: NavController) {
+    ProfilePage()
 }
 @Composable
 fun ProfilePage() {
@@ -195,3 +195,4 @@ fun ProfileSection(
         }
     }
 }
+

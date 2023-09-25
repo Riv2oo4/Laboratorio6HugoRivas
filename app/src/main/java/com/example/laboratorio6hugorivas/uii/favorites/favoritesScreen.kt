@@ -46,31 +46,29 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
 
-
-data class Eventos(val name: String, val artist: String, val imageId: Int,val favorite: Boolean = false )
-class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-
-            val event = Event(
-                place = "Lugar del Evento",
-                name = "Título del Evento",
-                date = "Fecha del Evento",
-                time = "Hora del Evento",
-                description = "Descripción del Evento",
-                imageId = R.drawable.evento_1
-            )
-
-            EventDetail(event = event)
-
-
-        }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ThirdScreen(navController: NavController) {
+    Scaffold {
+        BodyContent(navController)
     }
+}
+@Composable
+fun BodyContent(navController: NavController) {
+    val event = Event(
+        place = "Lugar del Evento",
+        name = "Título del Evento",
+        date = "Fecha del Evento",
+        time = "Hora del Evento",
+        description = "Descripción del Evento",
+        imageId = R.drawable.evento_1
+    )
+
+    EventDetail(event = event)
 }
 @Composable
 fun EventDetail(event: Event) {
@@ -168,3 +166,4 @@ data class Event(
     val time: String,
     val description: String,
     val imageId: Int)
+

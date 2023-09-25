@@ -33,15 +33,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
 
 data class Eventos(val name: String, val artist: String, val imageId: Int,val favorite: Boolean = false )
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FirstScreen() {
+fun FirstScreen(navController: NavController) {
     Scaffold {
-        BodyContent()
+        BodyContent(navController)
     }
 }
 @Composable
@@ -162,13 +163,16 @@ fun Myapp(events: List<Eventos>){
 
 
 @Composable
-fun BodyContent() {
+fun BodyContent(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
+        Text("Hola navegación")
+        Button(onClick = {/*TODO*/}){
+            Text("Navega")
+        }
         // Your existing content
         val eventosList = listOf(
             Eventos(name = "Evento 1", artist = "AC/DC", imageId = R.drawable.evento_1),
@@ -178,8 +182,3 @@ fun BodyContent() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun FirstDefaultPreview(){
-    FirstScreen()
-}

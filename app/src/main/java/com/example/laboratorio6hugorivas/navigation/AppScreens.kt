@@ -6,13 +6,6 @@ sealed class AppScreens(val route: String) {
     object detailsScreen : AppScreens("secondScreen")
     object favoritesScreen : AppScreens("thirdScreen")
     object profileScreen : AppScreens("fourthScreen")
-    fun withArgs(vararg args: String):String{
-        return buildString {
-            append(route)
-            args.forEach {
-                    arg->append("/$arg")
-            }
-        }
-    }
+
 }
 
