@@ -35,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
+import com.example.laboratorio6hugorivas.navigation.AppScreens
 
 data class Eventos(val name: String, val artist: String, val imageId: Int,val favorite: Boolean = false )
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -170,7 +171,7 @@ fun BodyContent(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Hola navegación")
-        Button(onClick = {/*TODO*/}){
+        Button(onClick = {navController.navigate(route= AppScreens.detailsScreen.route)}){
             Text("Navega")
         }
         // Your existing content
