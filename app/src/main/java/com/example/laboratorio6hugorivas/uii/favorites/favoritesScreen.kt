@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -48,6 +50,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
+import com.example.laboratorio6hugorivas.navigation.AppScreens
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,19 +60,46 @@ fun ThirdScreen(navController: NavController) {
         BodyContent(navController)
     }
 }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BodyContent(navController: NavController) {
-    val event = Event(
-        place = "Lugar del Evento",
-        name = "Título del Evento",
-        date = "Fecha del Evento",
-        time = "Hora del Evento",
-        description = "Descripción del Evento",
-        imageId = R.drawable.evento_1
-    )
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Tercera Pantalla") },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.conciertosScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.profileScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowForward, contentDescription = "Forward")
+                    }
+                }
+            )
+        }
+    ) {
+        // Resto del contenido de la pantalla
+        val event = Event(
+            place = "Lugar del Evento",
+            name = "Título del Evento",
+            date = "Fecha del Evento",
+            time = "Hora del Evento",
+            description = "Descripción del Evento",
+            imageId = R.drawable.evento_1
+        )
 
-    EventDetail(event = event)
+        // Tu contenido específico de EventDetail
+        EventDetail(event = event)
+    }
 }
+
 @Composable
 fun EventDetail(event: Event) {
     Column(

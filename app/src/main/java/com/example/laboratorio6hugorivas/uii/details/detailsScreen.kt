@@ -19,6 +19,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -49,6 +51,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
+import com.example.laboratorio6hugorivas.navigation.AppScreens
 
 
 data class Eventos(val name: String, val artist: String, val imageId: Int,val favorite: Boolean = false )
@@ -61,13 +64,32 @@ fun SecondScreen(navController: NavController){
         BodyContent(navController)
     }
 }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BodyContent(navController: NavController){
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Detalles") },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.conciertosScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Forward")
+                    }
+                },
+                actions = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.favoritesScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowForward, contentDescription = "Forward")
+                    }
+                }
+            )
+        }
     ) {
+
         val events = listOf(
             "Evento 1" to "Lugar 1",
             "Evento 2" to "Lugar 2",

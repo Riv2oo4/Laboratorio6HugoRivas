@@ -19,6 +19,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -49,6 +51,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavController
 import com.example.laboratorio6hugorivas.R
+import com.example.laboratorio6hugorivas.navigation.AppScreens
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -59,9 +62,32 @@ fun FourthScreen(navController: NavController) {
         BodyContent(navController)
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun BodyContent(navController: NavController) {
-    ProfilePage()
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Perfil") },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.conciertosScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Forward")
+                    }
+                },
+                actions = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.favoritesScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowForward, contentDescription = "Forward")
+                    }
+                }
+            )
+        }
+    ){ProfilePage()}
+
 }
 @Composable
 fun ProfilePage() {

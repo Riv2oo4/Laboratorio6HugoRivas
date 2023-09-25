@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.ui.draw.clip
@@ -163,23 +166,40 @@ fun Myapp(events: List<Eventos>){
 }
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BodyContent(navController: NavController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Hola navegación")
-        Button(onClick = {navController.navigate(route= AppScreens.detailsScreen.route)}){
-            Text("Navega")
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Conciertos") },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.profileScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Forward")
+                    }
+                },
+                actions = {
+                    IconButton(
+                        onClick = { navController.navigate(route = AppScreens.detailsScreen.route) }
+                    ) {
+                        Icon(Icons.Default.ArrowForward, contentDescription = "Forward")
+                    }
+                }
+            )
         }
-        // Your existing content
+    ) {
+
+
         val eventosList = listOf(
             Eventos(name = "Evento 1", artist = "AC/DC", imageId = R.drawable.evento_1),
             Eventos(name = "Evento 2", artist = "Peso pluma", imageId = R.drawable.evento_2)
         )
         TodoEventosApp(events = eventosList)
     }
+
+
 }
 
